@@ -7,9 +7,17 @@
    2. Gift-card carousel arrows + aria-disabled state (native scroll-snap does the scrolling). */
 (function () {
   'use strict';
+  /* TRACER: proves the file loaded and ran. Check the console for "[Lodestar]" lines, or run
+     document.documentElement.getAttribute('data-lodestar-js') -> "loaded" (then "ready" once the widgets are found). */
+  var VERSION = '1.0.0';
+  var root = document.documentElement;
+  root.setAttribute('data-lodestar-js', 'loaded');
+  root.setAttribute('data-lodestar-version', VERSION);
+  if (window.console && console.info) { console.info('[Lodestar] script loaded v' + VERSION); }
+  function trace(msg) { if (window.console && console.info) { console.info('[Lodestar] ' + msg); } }
   var SCOPE = '.dashboards-1382-page';
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var doneCount = false, doneGc = false, mo = null;
+  var doneCount = false, doneGc = false, readyLogged = false, mo = null;
 
   /* 0 · accessibility attributes (the HTML widget editor removes aria-*, role and tabindex) */
   var A11Y = [
@@ -91,15 +99,17 @@
     var page = document.querySelector(SCOPE);
     if (!page) { return; }
     restoreA11y(page);
+    if (!page.hasAttribute('data-lodestar-seen')) { page.setAttribute('data-lodestar-seen', '1'); trace('page scope found (.dashboards-1382-page)'); }
     var n = page.querySelector('.credits-widget > .col-xs-12'), g = page.querySelector('.gc-widget');
-    if (n && !doneCount) { doneCount = true; countUp(n); }
-    if (g && !doneGc) { doneGc = true; initGc(g); }
+    if (n && !doneCount) { doneCount = true; countUp(n); trace('credit count-up ' + (reduce ? 'skipped (reduced motion)' : 'armed')); }
+    if (g && !doneGc) { doneGc = true; initGc(g); trace('gift-card arrows added'); }
+    if (doneCount && doneGc && !readyLogged) { readyLogged = true; root.setAttribute('data-lodestar-js', 'ready'); trace('ready'); }
     if (doneCount && doneGc && mo) { mo.disconnect(); mo = null; }
   }
   init();
   if ((!doneCount || !doneGc) && 'MutationObserver' in window) {
     mo = new MutationObserver(function () { window.requestAnimationFrame(init); });
     mo.observe(document.documentElement, { childList: true, subtree: true });
-    window.setTimeout(function () { if (mo) { mo.disconnect(); mo = null; } }, 15000);  /* stop watching; quiet on other pages */
+    window.setTimeout(function () { if (mo) { mo.disconnect(); mo = null; trace('gave up waiting for widgets (count-up ' + doneCount + ', gift cards ' + doneGc + ')'); } }, 15000);  /* stop watching; quiet on other pages */
   }
 }());
