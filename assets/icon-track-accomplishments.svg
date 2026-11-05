@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45" fill="none">
+<rect x="5.5" y="22.5" width="11.5" height="17.5" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="1.0" stroke-linejoin="miter" stroke-linecap="butt"/>
+<rect x="17" y="15.5" width="11" height="24.5" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="1.0" stroke-linejoin="miter" stroke-linecap="butt"/>
+<rect x="28" y="26.5" width="11.5" height="13.5" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="1.0" stroke-linejoin="miter" stroke-linecap="butt"/>
+<path d="M22.50 2.80 L23.97 6.38 L27.83 6.67 L24.88 9.17 L25.79 12.93 L22.50 10.90 L19.21 12.93 L20.12 9.17 L17.17 6.67 L21.03 6.38Z" fill="#fff" fill-opacity=".4" stroke="#fff" stroke-width="1.0" stroke-linejoin="miter" stroke-linecap="butt"/>
+<circle cx="9.55" cy="27" r=".95" fill="#fff"/><circle cx="12.95" cy="27" r=".95" fill="#fff"/><circle cx="22.50" cy="20.5" r=".95" fill="#fff"/><circle cx="30.35" cy="31" r=".95" fill="#fff"/><circle cx="33.75" cy="31" r=".95" fill="#fff"/><circle cx="37.15" cy="31" r=".95" fill="#fff"/>
+<path d="M3.5 41.6H41.5" stroke="#fff" stroke-opacity=".6" stroke-width="1.6"/>
+</svg>
